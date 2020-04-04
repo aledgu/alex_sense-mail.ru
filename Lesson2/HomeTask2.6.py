@@ -17,15 +17,19 @@
 """
 
 
+goods = []
+features = {'название': '', 'цена': '', 'количество': '', 'единица измерения': ''}
+analitics = {'название': [], 'цена': [], 'количество': [], 'единица измерения': []}
+num = 0
 while True:
-    days = 1
-    start_km = int(input('Стартовый результат: '))
-    last_km = int(input('Финальный результат: '))
-    if start_km > last_km:
-        print('Введены неверные данные')
-    else:
-        while start_km < last_km:
-            start_km += start_km * 0.1  # start_km = start_km + (start_km * 0.1)
-            days += 1
-        print('Спортсмен добьется результата за {} дней'.format(days))
+    if input('Выход - Q, \nЛюбая клавиша - продолжить: ').upper() == 'Q':
         break
+    num += 1
+    for f in features.keys():
+        user_data = input('{}: '.format(f))
+        features[f] = int(user_data) if (f == 'цена' or f == 'количество') else user_data
+        analitics[f].append(features[f])
+    goods.append((num, features))
+    print('Текущая аналитика по товарам:\n')
+    for key, value in analitics.items():
+        print(key, value)
